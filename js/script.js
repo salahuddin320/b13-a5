@@ -7,6 +7,8 @@ const openContainer = document.getElementById("open-container");
 const issueContainer = document.getElementById("issue-container");
 const closedContainer = document.getElementById("closed-container");
 
+const totalIssue = document.getElementById("total");
+
 
 const switchTab = (tab) => {
     // console.log(tab);
@@ -36,6 +38,7 @@ const switchTab = (tab) => {
     } else if (tab === "closed") {
         closedContainer.classList.remove("hidden");
     }
+    updateStat();
 };
 switchTab(currentTab);
 
@@ -46,19 +49,8 @@ const loadIssues = () => {
         .then(res => res.json())
         .then(json => displayIssues(json.data));
 
-
-    // const openIssue = (open) => {
-    //     const opened = allIssue.filter(issue=>issue.open === open);
-    //     displayIssues(opened);
-    // };
-
     const displayIssues = (issues) => {
-        // console.log(issues);
-        // let totalIssue = issues;
-        // if(currentTab === "open"){
-        //    const totalIssue = issues.filter(issue => issue.status === "open");
-        //    console.log(totalIssue) 
-        // }
+
         const openContainer = document.getElementById("open-container");
         const closedContainer = document.getElementById("closed-container");
         const issueContainer = document.getElementById("issue-container");
@@ -105,6 +97,16 @@ const loadIssues = () => {
         closedIssues.forEach(issue =>{
             closedContainer.append(card(issue));
         });
+        updateStat();
     };
 };
 loadIssues();
+
+const updateStat = () =>{
+    const counts = {
+        all: issueContainer.children.length,
+        open: openContainer.children.length,
+        closed: closedContainer.children.length,
+    };
+    totalIssue.innerText = counts[currentTab]
+};
