@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- title and fev icon -->
+    <title>Github-Issue-Tracker</title>
+    <link rel="shortcut icon" href="./assets/Aperture.png" type="image/x-icon">
+
+    <!-- font awesome link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- font integration -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- tailwind + daisyui -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- style css -->
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+
+<body class="bg-[#F8FAFC]">
+    <header>
+        <!-- nav bar -->
+        <div class="navbar bg-base-100 shadow-sm">
+            <div class="navbar-start">
+                <div class="dropdown">
+                    <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
+                    </div>
+                    <ul tabindex="-1"
+                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        <li><a><i class="fa-solid fa-circle-question"></i>FAQ</a>
+                        </li>
+                        <li><a><i class="fa-solid fa-book-open"></i>Learn</a></li>
+                        <li><a><i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a></li>
+                    </ul>
+                </div>
+                <a class="btn btn-ghost text-xl">
+                    <img class="w-10" src="./assets/github-logo.png" alt="">
+                    <span class="font-bangle font-medium text-2xl">GitHub Issues Tracker</span>
+                </a>
+            </div>
+            <div class="navbar-end hidden lg:flex">
+
+                <div class="join">
+                    <div>
+                        <label class="input validator join-item">
+                            <input id="input-search" type="text" placeholder="Search issues..." required />
+                        </label>
+                    </div>
+                    <button id="btn-search" class="btn btn-primary join-item">Search</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- buttons -->
+    <section class="bg-white mx-auto p-6 mt-[60] mb-2 w-10/12">
+        <button onclick="switchTab('all')" id="tab-all" class="btn btn-outline btn-primary">All</button>
+        <button onclick="switchTab('open')" id="tab-open" class="btn btn-outline btn-primary">Open</button>
+        <button onclick="switchTab('closed')" id="tab-closed" class="btn btn-outline btn-primary">Closed</button>
+    </section>
+    <!-- count -->
+    <section class="bg-white mx-auto p-6 mt-[60] mb-2 w-10/12 flex justify-between items-center">
+        <div class="flex items-center justify-center gap-4">
+            <img src="./assets/Aperture.png" alt="">
+            <div>
+                <h2 class="font-semibold text-5">50 Issues</h2>
+                <p class="text-sm text-[#64748B]">Track and manage your project issues</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2">
+                <div class="w-4 h-4 rounded-full bg-[#00A96E]"></div>
+                <p class="text-sm font-semibold">Open</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="w-4 h-4 rounded-full bg-[#A855F7]"></div>
+                <p class="text-sm font-semibold">Closed</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- issue container -->
+    <section>
+        <div id="issue-container" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 w-10/12 mx-auto">    
+        </div>
+        <div id="open-container" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 w-10/12 mx-auto">    
+        </div>
+        <div id="closed-container" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 w-10/12 mx-auto">    
+        </div>
+
+    </section>
+
+    <!-- spinier -->
+    <section id="spinner" class="flex justify-center items-center py-10 hidden">
+        <span class="loading loading-bars loading-xl"></span>
+    </section>
+
+
+    <!-- Open the modal using ID.showModal() method -->
+    <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+    <dialog id="word_modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <div id="details-container" class="space-y-5">
+
+            </div>
+            <div class="modal-action">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
