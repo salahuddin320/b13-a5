@@ -77,7 +77,7 @@ const loadIssues = () => {
                     <p class="text-sm text-[#64748B]">${issue.description}
                     </p>
                     <div class="flex gap-3">
-                        <div class="bg-[#FEECEC] p-2 h-6 text-[12px] text-[#EF4444] rounded-2xl flex justify-center items-center">${issue.labels[0].toUpperCase()}</div>
+                        <div class="bg-[#FEECEC] p-2 h-6 text-[12px] ${issue.labels[0].toUpperCase() === "BUG" ? "text-red-500 bg-red-100" : "text-[#00A96E] bg-[#97ebb3]"} rounded-2xl flex justify-center items-center">${issue.labels[0].toUpperCase()}</div>
                         <div class="bg-[#FEECEC] p-2  h-6 text-[12px] text-[#EF4444] rounded-2xl flex justify-center items-center">${issue.labels[1]}</div>
                     </div>
                 </div>
