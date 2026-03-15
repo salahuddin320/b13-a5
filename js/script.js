@@ -38,7 +38,7 @@ const switchTab = (tab) => {
     } else if (tab === "closed") {
         closedContainer.classList.remove("hidden");
     }
-    updateStat();
+    // updateStat();
 };
 switchTab(currentTab);
 
@@ -61,16 +61,17 @@ const loadIssues = () => {
         const openIssues = issues.filter(issue => issue.status === "open");
         const closedIssues = issues.filter(issue => issue.status === "closed");
 
-       const card = (issue) => {
+        const card = (issue) => {
             // console.log(issue)
 
             const issueDiv = document.createElement("div");
             issueDiv.innerHTML = `
-                <div class="card p-4 bg-white border-t-2 border-[green] rounded-t-4 ">
+               <div class="card p-4 bg-white border-t-4 ${issue.status === "open" ? "border-green-500" : "border-purple-500"} rounded-t-xl">
+                
                 <div class="bg-white mb-2 space-y-2">
                     <div class="flex justify-between">
                         <img class="w-5" src="./assets/Open-Status.png" alt="">
-                        <div class="bg-[#FEECEC] p-2 w-[80px] h-6 text-[12px] text-[#EF4444] rounded-2xl flex justify-center items-center">${issue.priority.toUpperCase()}</div>
+                        <div class="bg-[#FEECEC] p-2 w-[80px] h-6 text-[12px] ${issue.priority.toUpperCase() === "HIGH" ? "text-red-500 bg-red-100" : issue.priority.toUpperCase() === "MEDIUM" ? "text-[#F59E0B] bg-[#FFF6D1]" : "text-[#9CA3AF] bg-[#EEEFF2]"} rounded-2xl flex justify-center items-center">${issue.priority.toUpperCase()}</div>
                     </div>
                     <h2 class="font-semibold text-sm">${issue.title}</h2>
                     <p class="text-sm text-[#64748B]">${issue.description}
@@ -88,13 +89,13 @@ const loadIssues = () => {
            `;
             return issueDiv
         }
-        issues.forEach(issue =>{
+        issues.forEach(issue => {
             issueContainer.append(card(issue));
         })
-        openIssues.forEach(issue =>{
+        openIssues.forEach(issue => {
             openContainer.append(card(issue));
         })
-        closedIssues.forEach(issue =>{
+        closedIssues.forEach(issue => {
             closedContainer.append(card(issue));
         });
         updateStat();
@@ -102,7 +103,7 @@ const loadIssues = () => {
 };
 loadIssues();
 
-const updateStat = () =>{
+const updateStat = () => {
     const counts = {
         all: issueContainer.children.length,
         open: openContainer.children.length,
