@@ -66,7 +66,7 @@ const loadIssues = () => {
 
             const issueDiv = document.createElement("div");
             issueDiv.innerHTML = `
-               <div class="card p-4 bg-white border-t-4 ${issue.status === "open" ? "border-green-500" : "border-purple-500"} rounded-t-xl">
+               <div class="card p-4 bg-white border-t-4 ${issue.status === "open" ? "border-green-500" : "border-purple-500"} rounded-t-xl" onclick="my_modal_1.showModal()">
                 
                 <div class="bg-white mb-2 space-y-2">
                     <div class="flex justify-between">
@@ -109,5 +109,6 @@ const updateStat = () => {
         open: openContainer.children.length,
         closed: closedContainer.children.length,
     };
-    totalIssue.innerText = counts[currentTab]
+    
+    totalIssue.innerText = counts[currentTab];
 };
